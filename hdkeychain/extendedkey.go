@@ -382,6 +382,11 @@ func (k *ExtendedKey) Address(net *chaincfg.Params) (*btcutil.AddressPubKeyHash,
 	return btcutil.NewAddressPubKeyHash(pkHash, net)
 }
 
+func (k *ExtendedKey) AddressBech32(net *chaincfg.Params) (*btcutil.AddressWitnessPubKeyHash, error) {
+	pkHash := btcutil.Hash160(k.pubKeyBytes())
+	return btcutil.NewAddressWitnessPubKeyHash(pkHash, net)
+}
+
 // paddedAppend appends the src byte slice to dst, returning the new slice.
 // If the length of the source is smaller than the passed size, leading zero
 // bytes are appended to the dst slice before appending src.
